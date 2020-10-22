@@ -11,6 +11,9 @@ start = "python list2_1.py"
 [packages]
 tensorflow = "==1.12.0"
 keras = "==2.2.4"
+numpy = "*"
+scipy = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.6"
