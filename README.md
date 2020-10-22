@@ -12,5 +12,5 @@ sudo apt install python3.6 python3.6-dev
 export PIPENV_VENV_IN_PROJECT=true
 python3.6 -m pipenv --python 3.6
 python3.6 -m pipenv install tensorflow==1.12.0
-python3.6 -m pipenv run start
+python3.6 -m pipenv shell
 ```

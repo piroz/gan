@@ -11,7 +11,7 @@ batch_size = 1024
 original_dim = 784
 latent_dim = 2
 intermediate_dim = 256
-epoch = 50
+epochs = 50
 eplisilon_std = 1.0
 
 
@@ -47,3 +47,13 @@ def vae_loss(x: tf.Tensor, x_decoeded_mean: tf.Tensor, z_log_var=z_log_var, z_me
 
 vae.compile(optimizer='rmsprop', loss=vae_loss)
 vae.summary()
+
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+x_train = x_train.astype("float32") /  255.
+x_test = x_test.astype("float32") /  255.
+
+x_train = x_train.reshape((len(x_train), np.prod(x_train.shape[1:])))
+x_test = x_test.reshape((len(x_test), np.prod(x_test.shape[1:])))
+
+vae.fit(x_train, x_train, shuffle=True, epochs=epochs, batch_size=batch_size)
