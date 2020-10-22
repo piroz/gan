@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_agg import FigureCanvasAgg
 from scipy.stats import norm
 import tensorflow as tf
 
@@ -85,7 +86,10 @@ vae.fit(x_train, x_train,
         batch_size=batch_size)
 
 x_test_encoded = encoder.predict(x_test, batch_size=batch_size)[0]
-plt.figure(figsize=(6, 6))
+fig = plt.figure(figsize=(6, 6))
 plt.scatter(x_test_encoded[:,0], x_test_encoded[:,1], c=y_test, cmap='viridis')
 plt.colorbar()
-plt.show()
+# plt.show()
+
+canvas = FigureCanvasAgg(fig)
+canvas.print_png("ch2.png")
