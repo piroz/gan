@@ -111,6 +111,9 @@ for i, yi in enumerate(grid_x):
         figure[i * digit_size: (i + 1) * digit_size,
                j * digit_size: (j + 1) * digit_size] = digit
 
-plt.figure(figsize=(10, 10))
+fig2 = plt.figure(figsize=(10, 10))
 plt.imshow(figure, cmap='Greys_r')
-plt.show()
+# plt.show()
+
+canvas = FigureCanvasAgg(fig2)
+canvas.print_png("ch2_2.png")
