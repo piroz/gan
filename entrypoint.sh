@@ -10,9 +10,11 @@ groupmod -g $GROUP_ID $USER_NAME
 export HOME=/home/$USER_NAME
 
 chown $USER_ID:$GROUP_ID Pipfile Pipfile.lock entrypoint.sh /app
-/usr/sbin/gosu $USER_NAME python -m pipenv install
-/usr/sbin/gosu $USER_NAME python -m pipenv uninstall tensorflow --skip-lock
-/usr/sbin/gosu $USER_NAME python -m pipenv install tensorflow-gpu==1.12.0 --skip-lock
+/usr/sbin/gosu $USER_NAME python -m pipenv sync
+if [ x"$USE_GPU" != "x" ]; then
+    /usr/sbin/gosu $USER_NAME python -m pipenv uninstall tensorflow --skip-lock
+    /usr/sbin/gosu $USER_NAME python -m pipenv install tensorflow-gpu==1.12.0 --skip-lock
+fi
 
 echo "command-line argument:"
 echo "$@"
